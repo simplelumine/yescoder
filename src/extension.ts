@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { ProfileResponse } from './types';
 import { fetchBalance, setApiKey } from './api';
 import { calculateBalance, DisplayMode } from './balance';
+import { showVendorSwitchMenu } from './provider';
 
 let statusBarItem: vscode.StatusBarItem;
 let refreshTimer: NodeJS.Timeout | undefined;
@@ -36,6 +37,10 @@ export function activate(context: vscode.ExtensionContext) {
                     description: 'Change between Auto/Subscription/PayGo/Team modes'
                 },
                 {
+                    label: '$(arrow-swap) Switch Vendor',
+                    description: 'Change provider vendor settings'
+                },
+                {
                     label: '$(key) Set API Key',
                     description: 'Configure your YesCode API key'
                 }
@@ -50,6 +55,8 @@ export function activate(context: vscode.ExtensionContext) {
                     await vscode.commands.executeCommand('yescode.refreshBalance');
                 } else if (selected.label.includes('Switch Display Mode')) {
                     await vscode.commands.executeCommand('yescode.switchDisplayMode');
+                } else if (selected.label.includes('Switch Vendor')) {
+                    await vscode.commands.executeCommand('yescode.switchVendor');
                 } else if (selected.label.includes('Set API Key')) {
                     await vscode.commands.executeCommand('yescode.setApiKey');
                 }
@@ -158,6 +165,12 @@ export function activate(context: vscode.ExtensionContext) {
 
                 vscode.window.showInformationMessage(`Display mode switched to: ${selected.label}`);
             }
+        })
+    );
+
+    context.subscriptions.push(
+        vscode.commands.registerCommand('yescode.switchVendor', async () => {
+            await showVendorSwitchMenu(context);
         })
     );
 
