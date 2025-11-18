@@ -6,20 +6,24 @@ export function generateCliSetupCommand(
 ): string {
     const baseUrl = 'https://co.yes.vg';
 
-    // Build the command based on CLI, OS, and mode
+    // Get script name based on CLI
+    const scriptName = cli === 'claude' ? 'claude-code' : cli === 'codex' ? 'codex' : 'gemini';
+    const scriptFileName = cli === 'gemini' ? `setup_${scriptName}` : `setup-${scriptName}`;
+
+    // Determine URL based on CLI and mode
+    let url: string;
+    if (mode === 'team') {
+        url = cli === 'gemini' ? `${baseUrl}/team/gemini` : `${baseUrl}/team`;
+    } else {
+        url = cli === 'gemini' ? `${baseUrl}/gemini` : baseUrl;
+    }
+
+    // Build the command based on OS
     if (os === 'unix') {
         // Unix-based systems (Linux, macOS)
-        if (mode === 'team') {
-            return `curl -s ${baseUrl}/setup_${cli}.sh | bash -s -- --url ${baseUrl}/team/${cli} --key ${apiKey}`;
-        } else {
-            return `curl -s ${baseUrl}/setup_${cli}.sh | bash -s -- --key ${apiKey}`;
-        }
+        return `curl -s ${baseUrl}/${scriptFileName}.sh | bash -s -- --url ${url} --key ${apiKey}`;
     } else {
-        // Windows
-        if (mode === 'team') {
-            return `powershell -Command "irm ${baseUrl}/setup_${cli}.ps1 | iex; Setup-${cli.charAt(0).toUpperCase() + cli.slice(1)} -Url '${baseUrl}/team/${cli}' -Key '${apiKey}'"`;
-        } else {
-            return `powershell -Command "irm ${baseUrl}/setup_${cli}.ps1 | iex; Setup-${cli.charAt(0).toUpperCase() + cli.slice(1)} -Key '${apiKey}'"`;
-        }
+        // Windows PowerShell
+        return `& { $base='${baseUrl}'; $url='${url}'; $key='${apiKey}'; iwr -useb $base/${scriptFileName}.ps1 | iex }`;
     }
 }
