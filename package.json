@@ -3,7 +3,7 @@
   "displayName": "YesCoder",
   "publisher": "simplelumine",
   "description": "Your essential companion for YesCode in VS Code. Monitor your balance and manage providers seamlessly.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "icon": "logo.png",
   "repository": {

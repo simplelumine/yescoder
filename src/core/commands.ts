@@ -54,6 +54,8 @@ async function handleShowMenu(context: vscode.ExtensionContext): Promise<void> {
             await vscode.commands.executeCommand('yescode.switchVendor');
         } else if (selected.label.includes('Set API Key')) {
             await vscode.commands.executeCommand('yescode.setApiKey');
+        } else if (selected.label.includes('Configure CLI Environment')) {
+            await vscode.commands.executeCommand('yescode.configureCliEnvironment');
         }
     }
 }

@@ -27,6 +27,11 @@ export function buildMainMenu(showProviderSwitch: boolean = true): vscode.QuickP
         description: 'Configure your YesCode API key'
     });
 
+    items.push({
+        label: '$(tools) Configure CLI Environment',
+        description: 'One-click setup for YesCode CLIs'
+    });
+
     return items;
 }
 
