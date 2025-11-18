@@ -28,8 +28,8 @@ export function buildMainMenu(showProviderSwitch: boolean = true): vscode.QuickP
     });
 
     items.push({
-        label: '$(tools) Configure CLI Environment',
-        description: 'One-click setup for YesCode CLIs'
+        label: '$(rocket) One-Click CLI Setup...',
+        description: 'Auto-execute or copy setup commands'
     });
 
     return items;

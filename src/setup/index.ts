@@ -82,7 +82,7 @@ export async function showCliSetupMenu(context: vscode.ExtensionContext): Promis
             description: 'Cross-platform',
             cli: 'claude',
             mode: 'user',
-            detail: `  └ Copy command for ${alternateOsLabel} (for use on other machines)`,
+            detail: `  └ Get command for alternate OS (${alternateOsLabel})`,
             isCustom: true
         });
 

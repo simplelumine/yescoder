@@ -6,6 +6,7 @@ Your essential companion for YesCode in VS Code. Monitor your balance and manage
 
 ## Features
 
+-   **One-Click CLI Setup**: Quickly get setup commands for YesCode's CLIs (Gemini, Codex, Claude). The helper intelligently detects your OS and team status to provide the right command, which can be executed automatically in the terminal or copied to the clipboard.
 -   **Balance Monitoring:** Keep an eye on your most critical balance (Team, Subscription, or PayGo) directly in the status bar.
 -   **Provider Management:** Switch your default and alternative providers for both your user account and your team account without ever leaving the editor.
 -   **Seamless Account Support:** Works with all types of YesCode accounts, including production and special/testing accounts, by automatically connecting to the correct backend services.
@@ -24,6 +25,7 @@ Your essential companion for YesCode in VS Code. Monitor your balance and manage
 
 ## Commands
 
+-   **`YesCode: One-Click CLI Setup...`**: Opens the CLI setup helper.
 -   **`YesCode: Show Menu`**: Opens the main command menu from the status bar.
 -   **`YesCode: Refresh Balance`**: Manually refreshes your balance information.
 -   **`YesCode: Switch Display Mode`**: Manually selects which balance to display.

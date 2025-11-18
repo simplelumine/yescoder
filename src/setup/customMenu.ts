@@ -1,7 +1,48 @@
 import * as vscode from 'vscode';
 import { generateCliSetupCommand } from '../core/setupCommands';
-import { buildUserMenuItems } from './userMenu';
-import { buildTeamMenuItems } from './teamMenu';
+
+/**
+ * Build custom menu items for alternate OS
+ */
+function buildCustomUserMenuItems(targetOsLabel: string): vscode.QuickPickItem[] {
+    return [
+        {
+            label: '$(person) Claude Code',
+            description: '',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        },
+        {
+            label: '$(person) Codex CLI',
+            description: '',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        },
+        {
+            label: '$(person) Gemini CLI',
+            description: '',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        }
+    ];
+}
+
+function buildCustomTeamMenuItems(targetOsLabel: string): vscode.QuickPickItem[] {
+    return [
+        {
+            label: '$(organization) Claude Code',
+            description: 'TEAM',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        },
+        {
+            label: '$(organization) Codex CLI',
+            description: 'TEAM',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        },
+        {
+            label: '$(organization) Gemini CLI',
+            description: 'TEAM',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        }
+    ];
+}
 
 /**
  * Show custom setup menu for alternate OS
@@ -23,7 +64,7 @@ export async function showCustomSetupMenu(
         kind: vscode.QuickPickItemKind.Separator
     });
 
-    menuItems.push(...buildUserMenuItems(targetOsLabel, false));
+    menuItems.push(...buildCustomUserMenuItems(targetOsLabel));
 
     // Add Team section if available
     if (teamInfo) {
@@ -32,12 +73,12 @@ export async function showCustomSetupMenu(
             kind: vscode.QuickPickItemKind.Separator
         });
 
-        menuItems.push(...buildTeamMenuItems(targetOsLabel, false));
+        menuItems.push(...buildCustomTeamMenuItems(targetOsLabel));
     }
 
     const selected = await vscode.window.showQuickPick(menuItems, {
         placeHolder: `Select CLI to copy ${targetOsLabel} setup command`,
-        title: `${targetOsLabel} Setup (Copy Command)`,
+        title: `Alternate OS Setup: ${targetOsLabel}`,
         ignoreFocusOut: true
     });
 

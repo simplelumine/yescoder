@@ -8,29 +8,26 @@ interface TeamMenuItem extends vscode.QuickPickItem {
 /**
  * Build team menu items
  * @param osLabel - The OS label (e.g., "PowerShell" or "Unix")
- * @param showAutoOption - Whether to show AUTO option (true for current OS, false for cross-platform)
  */
-export function buildTeamMenuItems(osLabel: string, showAutoOption: boolean = true): TeamMenuItem[] {
-    const modeText = showAutoOption ? 'AUTO / Manual Copy' : 'Manual Copy Only';
-
+export function buildTeamMenuItems(osLabel: string): TeamMenuItem[] {
     return [
         {
             label: '$(organization) Claude Code',
             description: 'TEAM',
             cli: 'claude',
-            detail: `  └ ${osLabel} • ${modeText}`
+            detail: `  └ Detected OS: ${osLabel}`
         },
         {
             label: '$(organization) Codex CLI',
             description: 'TEAM',
             cli: 'codex',
-            detail: `  └ ${osLabel} • ${modeText}`
+            detail: `  └ Detected OS: ${osLabel}`
         },
         {
             label: '$(organization) Gemini CLI',
             description: 'TEAM',
             cli: 'gemini',
-            detail: `  └ ${osLabel} • ${modeText}`
+            detail: `  └ Detected OS: ${osLabel}`
         }
     ];
 }
@@ -51,7 +48,7 @@ export async function handleTeamSelection(
     const choice = await vscode.window.showInformationMessage(
         `Setup ${cliName} CLI for Team:`,
         { modal: true, detail: 'Choose how to proceed with the team setup command.' },
-        'Auto Execute (Secure)',
+        'Auto Execute',
         'Copy Command'
     );
 
@@ -68,7 +65,7 @@ export async function handleTeamSelection(
         baseUrl
     );
 
-    if (choice === 'Auto Execute (Secure)') {
+    if (choice === 'Auto Execute') {
         // Auto-execute in terminal without exposing team key to clipboard
         const terminal = vscode.window.createTerminal(`${cliName} Team Setup`);
         terminal.show();

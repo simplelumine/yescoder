@@ -8,29 +8,26 @@ interface UserMenuItem extends vscode.QuickPickItem {
 /**
  * Build user menu items
  * @param osLabel - The OS label (e.g., "PowerShell" or "Unix")
- * @param showAutoOption - Whether to show AUTO option (true for current OS, false for cross-platform)
  */
-export function buildUserMenuItems(osLabel: string, showAutoOption: boolean = true): UserMenuItem[] {
-    const modeText = showAutoOption ? 'AUTO / Manual Copy' : 'Manual Copy Only';
-
+export function buildUserMenuItems(osLabel: string): UserMenuItem[] {
     return [
         {
             label: '$(person) Claude Code',
             description: '',
             cli: 'claude',
-            detail: `  └ ${osLabel} • ${modeText}`
+            detail: `  └ Detected OS: ${osLabel}`
         },
         {
             label: '$(person) Codex CLI',
             description: '',
             cli: 'codex',
-            detail: `  └ ${osLabel} • ${modeText}`
+            detail: `  └ Detected OS: ${osLabel}`
         },
         {
             label: '$(person) Gemini CLI',
             description: '',
             cli: 'gemini',
-            detail: `  └ ${osLabel} • ${modeText}`
+            detail: `  └ Detected OS: ${osLabel}`
         }
     ];
 }
@@ -51,7 +48,7 @@ export async function handleUserSelection(
     const choice = await vscode.window.showInformationMessage(
         `Setup ${cliName} CLI:`,
         { modal: true, detail: 'Choose how to proceed with the setup command.' },
-        'Auto Execute (Secure)',
+        'Auto Execute',
         'Copy Command'
     );
 
@@ -68,7 +65,7 @@ export async function handleUserSelection(
         baseUrl
     );
 
-    if (choice === 'Auto Execute (Secure)') {
+    if (choice === 'Auto Execute') {
         // Auto-execute in terminal without exposing key to clipboard
         const terminal = vscode.window.createTerminal(`${cliName} Setup`);
         terminal.show();
