@@ -46,17 +46,18 @@ async function handleShowMenu(context: vscode.ExtensionContext): Promise<void> {
     });
 
     if (selected) {
-        if (selected.label.includes('Refresh Balance')) {
+        // Use icon prefixes for detection to work in all languages
+        if (selected.label.includes('$(sync)')) {
             await vscode.commands.executeCommand('yescode.refreshBalance');
-        } else if (selected.label.includes('Switch Display Mode')) {
+        } else if (selected.label.includes('$(symbol-color)')) {
             await vscode.commands.executeCommand('yescode.switchDisplayMode');
-        } else if (selected.label.includes('Switch Vendor')) {
+        } else if (selected.label.includes('$(arrow-swap)')) {
             await vscode.commands.executeCommand('yescode.switchVendor');
-        } else if (selected.label.includes('Set API Key')) {
+        } else if (selected.label.includes('$(key)')) {
             await vscode.commands.executeCommand('yescode.setApiKey');
-        } else if (selected.label.includes('One-Click CLI Setup')) {
+        } else if (selected.label.includes('$(rocket)')) {
             await vscode.commands.executeCommand('yescode.configureCliEnvironment');
-        } else if (selected.label.includes('Reverse Display')) {
+        } else if (selected.label.includes('$(settings-gear)')) {
             // Toggle the setting
             await config.update('reverseDisplay', !reverseDisplay, vscode.ConfigurationTarget.Global);
             // Refresh status bar to apply change
