@@ -4,9 +4,10 @@ import { getTeamInfo, getOperatingSystem } from './utils';
 import { buildUserMenuItems, handleUserSelection } from './userMenu';
 import { buildTeamMenuItems, handleTeamSelection } from './teamMenu';
 import { showCustomSetupMenu } from './customMenu';
+import { CliType } from '../core/setupCommands';
 
 interface CliOption extends vscode.QuickPickItem {
-    cli: 'gemini' | 'codex' | 'claude';
+    cli: CliType;
     mode: 'team' | 'user';
     isCustom?: boolean;
 }

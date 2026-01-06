@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
-import { generateCliSetupCommand } from '../core/setupCommands';
+import { generateCliSetupCommand, CliType } from '../core/setupCommands';
 
 interface TeamMenuItem extends vscode.QuickPickItem {
-    cli: 'gemini' | 'codex' | 'claude';
+    cli: CliType;
 }
 
 /**
@@ -28,6 +28,18 @@ export function buildTeamMenuItems(osLabel: string): TeamMenuItem[] {
             description: 'TEAM',
             cli: 'gemini',
             detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
+        },
+        {
+            label: `$(organization) ${vscode.l10n.t('OpenCode')}`,
+            description: 'TEAM',
+            cli: 'opencode',
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
+        },
+        {
+            label: `$(organization) ${vscode.l10n.t('Droid')}`,
+            description: 'TEAM',
+            cli: 'droid',
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
         }
     ];
 }
@@ -37,7 +49,7 @@ export function buildTeamMenuItems(osLabel: string): TeamMenuItem[] {
  */
 export async function handleTeamSelection(
     context: vscode.ExtensionContext,
-    selectedCli: 'gemini' | 'codex' | 'claude',
+    selectedCli: CliType,
     os: 'windows' | 'unix',
     teamApiKey: string,
     baseUrl: string

@@ -1,16 +1,37 @@
 /**
+ * Supported CLI types
+ */
+export type CliType = 'gemini' | 'codex' | 'claude' | 'opencode' | 'droid';
+
+/**
  * Generate CLI setup command
  */
 export function generateCliSetupCommand(
-    cli: 'gemini' | 'codex' | 'claude',
+    cli: CliType,
     os: 'windows' | 'unix',
     mode: 'team' | 'user',
     apiKey: string,
     baseUrl: string
 ): string {
     // Get script name based on CLI
-    const scriptName = cli === 'claude' ? 'claude-code' : cli === 'codex' ? 'codex' : 'gemini';
-    const scriptFileName = cli === 'gemini' ? `setup_${scriptName}` : `setup-${scriptName}`;
+    let scriptFileName: string;
+    switch (cli) {
+        case 'claude':
+            scriptFileName = 'setup-claude-code';
+            break;
+        case 'codex':
+            scriptFileName = 'setup-codex';
+            break;
+        case 'gemini':
+            scriptFileName = 'setup_gemini';
+            break;
+        case 'opencode':
+            scriptFileName = 'setup-opencode';
+            break;
+        case 'droid':
+            scriptFileName = 'setup-droid';
+            break;
+    }
 
     // Determine URL based on CLI and mode
     let url: string;

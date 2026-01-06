@@ -75,6 +75,8 @@
   "Claude Code": "Claude Code",
   "Codex CLI": "Codex CLI",
   "Gemini CLI": "Gemini CLI",
+  "OpenCode": "OpenCode",
+  "Droid": "Droid",
   "Run in Terminal": "Run in Terminal",
   "Copy to Clipboard": "Copy to Clipboard",
   "The command has been copied to your clipboard!": "The command has been copied to your clipboard!",

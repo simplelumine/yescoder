@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
-import { generateCliSetupCommand } from '../core/setupCommands';
+import { generateCliSetupCommand, CliType } from '../core/setupCommands';
 
 interface UserMenuItem extends vscode.QuickPickItem {
-    cli: 'gemini' | 'codex' | 'claude';
+    cli: CliType;
 }
 
 /**
@@ -28,6 +28,18 @@ export function buildUserMenuItems(osLabel: string): UserMenuItem[] {
             description: '',
             cli: 'gemini',
             detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
+        },
+        {
+            label: `$(person) ${vscode.l10n.t('OpenCode')}`,
+            description: '',
+            cli: 'opencode',
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
+        },
+        {
+            label: `$(person) ${vscode.l10n.t('Droid')}`,
+            description: '',
+            cli: 'droid',
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
         }
     ];
 }
@@ -37,7 +49,7 @@ export function buildUserMenuItems(osLabel: string): UserMenuItem[] {
  */
 export async function handleUserSelection(
     context: vscode.ExtensionContext,
-    selectedCli: 'gemini' | 'codex' | 'claude',
+    selectedCli: CliType,
     os: 'windows' | 'unix',
     apiKey: string,
     baseUrl: string

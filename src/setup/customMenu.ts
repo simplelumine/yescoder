@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { generateCliSetupCommand } from '../core/setupCommands';
+import { generateCliSetupCommand, CliType } from '../core/setupCommands';
 
 /**
  * Build custom menu items for alternate OS
@@ -7,17 +7,27 @@ import { generateCliSetupCommand } from '../core/setupCommands';
 function buildCustomUserMenuItems(targetOsLabel: string): vscode.QuickPickItem[] {
     return [
         {
-            label: '$(person) Claude Code',
+            label: `$(person) ${vscode.l10n.t('Claude Code')}`,
             description: '',
             detail: `  └ Alternative OS: ${targetOsLabel}`
         },
         {
-            label: '$(person) Codex CLI',
+            label: `$(person) ${vscode.l10n.t('Codex CLI')}`,
             description: '',
             detail: `  └ Alternative OS: ${targetOsLabel}`
         },
         {
-            label: '$(person) Gemini CLI',
+            label: `$(person) ${vscode.l10n.t('Gemini CLI')}`,
+            description: '',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        },
+        {
+            label: `$(person) ${vscode.l10n.t('OpenCode')}`,
+            description: '',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        },
+        {
+            label: `$(person) ${vscode.l10n.t('Droid')}`,
             description: '',
             detail: `  └ Alternative OS: ${targetOsLabel}`
         }
@@ -27,17 +37,27 @@ function buildCustomUserMenuItems(targetOsLabel: string): vscode.QuickPickItem[]
 function buildCustomTeamMenuItems(targetOsLabel: string): vscode.QuickPickItem[] {
     return [
         {
-            label: '$(organization) Claude Code',
+            label: `$(organization) ${vscode.l10n.t('Claude Code')}`,
             description: 'TEAM',
             detail: `  └ Alternative OS: ${targetOsLabel}`
         },
         {
-            label: '$(organization) Codex CLI',
+            label: `$(organization) ${vscode.l10n.t('Codex CLI')}`,
             description: 'TEAM',
             detail: `  └ Alternative OS: ${targetOsLabel}`
         },
         {
-            label: '$(organization) Gemini CLI',
+            label: `$(organization) ${vscode.l10n.t('Gemini CLI')}`,
+            description: 'TEAM',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        },
+        {
+            label: `$(organization) ${vscode.l10n.t('OpenCode')}`,
+            description: 'TEAM',
+            detail: `  └ Alternative OS: ${targetOsLabel}`
+        },
+        {
+            label: `$(organization) ${vscode.l10n.t('Droid')}`,
             description: 'TEAM',
             detail: `  └ Alternative OS: ${targetOsLabel}`
         }
@@ -89,12 +109,16 @@ export async function showCustomSetupMenu(
     // Parse selection
     const isTeam = selected.description === 'TEAM';
     const mode = isTeam ? 'team' : 'user';
-    let cli: 'claude' | 'codex' | 'gemini';
+    let cli: CliType;
 
     if (selected.label.includes('Claude')) {
         cli = 'claude';
     } else if (selected.label.includes('Codex')) {
         cli = 'codex';
+    } else if (selected.label.includes('OpenCode')) {
+        cli = 'opencode';
+    } else if (selected.label.includes('Droid')) {
+        cli = 'droid';
     } else {
         cli = 'gemini';
     }
@@ -111,10 +135,9 @@ export async function showCustomSetupMenu(
     // Copy to clipboard
     await vscode.env.clipboard.writeText(command);
 
-    const cliName = cli.charAt(0).toUpperCase() + cli.slice(1);
-
     // Show confirmation - only copy for cross-platform usage
     vscode.window.showInformationMessage(
         vscode.l10n.t('The command has been copied to your clipboard!')
     );
 }
+
