@@ -67,16 +67,6 @@ You can configure YesCoder in your VS Code settings or via the command menu.
 - **`YesCode: Set API Key`**: Stores your API key securely.
 - _(Deprecated)_ **`YesCode: Switch Vendor`**: This command is deprecated. Please use the web dashboard.
 
-## Acknowledgements
-
-Special thanks to:
-
-- **好果汁 (YesCode CFO)** for the testing environment and support.
-- **YesCode CTO** for the project name suggestion.
-- **喵酱 (YesCode User: 太阳照常升起)** for the API documentation reference.
-- **萝拉酱 (YesCode User: Aurora)** for testing and feedback.
-- **杰森酱 (YesCode User: Jason 🅥)** for valuable findings and suggestions.
-
 ## Project Architecture
 
 This extension is built with a clean, feature-driven architecture:
@@ -104,6 +94,16 @@ npm run watch
 
 # Open in VS Code and press F5 to launch the Extension Development Host.
 ```
+
+## Acknowledgements
+
+Special thanks to:
+
+- **好果汁 (YesCode CFO)** for the testing environment and support.
+- **YesCode CTO** for the project name suggestion.
+- **喵酱 (YesCode User: 太阳照常升起)** for the API documentation reference.
+- **萝拉酱 (YesCode User: Aurora)** for testing and feedback.
+- **杰森酱 (YesCode User: Jason)** for valuable findings and suggestions.
 
 ## License
 
