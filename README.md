@@ -1,12 +1,33 @@
-# YesCoder
+<div align="center">
+  <img src="logo.png" width="128" alt="YesCoder Logo" />
+  <h1>YesCoder</h1>
 
-[中文文档](./README_zh-CN.md)
+  <p>
+    <a href="https://marketplace.visualstudio.com/items?itemName=simplelumine.yescoder">
+      <img src="https://img.shields.io/visual-studio-marketplace/v/simplelumine.yescoder?style=flat-square&label=Version" alt="Version" />
+    </a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=simplelumine.yescoder">
+      <img src="https://img.shields.io/visual-studio-marketplace/i/simplelumine.yescoder?style=flat-square&label=Installs" alt="Installs" />
+    </a>
+    <a href="./LICENSE.md">
+      <img src="https://img.shields.io/github/license/simplelumine/yescoder?style=flat-square" alt="License" />
+    </a>
+  </p>
 
-- **Official Website:** [https://co.yes.vg](https://co.yes.vg)
-- **Test Website:** [https://cotest.yes.vg](https://cotest.yes.vg)
-- **Plugin Feedback:** [Report an Issue](https://github.com/simplelumine/yescoder/issues)
-- **Official Community:** [Discord](https://discord.gg/AXxg7qM358) | [Telegram](https://t.me/yes_code)
-- **VS Code Marketplace:** [Download Extension](https://marketplace.visualstudio.com/items?itemName=simplelumine.yescoder)
+  <p>
+    <a href="https://co.yes.vg">Official Website</a> •
+    <a href="https://cotest.yes.vg">Test Website</a> •
+    <a href="https://github.com/simplelumine/yescoder/issues">Plugin Feedback</a> •
+    <a href="https://discord.gg/AXxg7qM358">Discord</a> •
+    <a href="https://t.me/yes_code">Telegram</a>
+  </p>
+
+  <p>
+    <a href="./README_zh-CN.md">中文文档</a>
+  </p>
+</div>
+
+---
 
 Your essential companion for YesCode in VS Code. Monitor your balance seamlessly from the status bar.
 
