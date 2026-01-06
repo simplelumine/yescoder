@@ -115,6 +115,6 @@ export async function showCustomSetupMenu(
 
     // Show confirmation - only copy for cross-platform usage
     vscode.window.showInformationMessage(
-        `${cliName} ${targetOsLabel} setup command copied to clipboard!\n⚠️  Command contains API key, use with caution.`
+        vscode.l10n.t('The command has been copied to your clipboard!')
     );
 }

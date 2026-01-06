@@ -12,22 +12,22 @@ interface UserMenuItem extends vscode.QuickPickItem {
 export function buildUserMenuItems(osLabel: string): UserMenuItem[] {
     return [
         {
-            label: '$(person) Claude Code',
+            label: `$(person) ${vscode.l10n.t('Claude Code')}`,
             description: '',
             cli: 'claude',
-            detail: `  └ Current OS: ${osLabel}`
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
         },
         {
-            label: '$(person) Codex CLI',
+            label: `$(person) ${vscode.l10n.t('Codex CLI')}`,
             description: '',
             cli: 'codex',
-            detail: `  └ Current OS: ${osLabel}`
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
         },
         {
-            label: '$(person) Gemini CLI',
+            label: `$(person) ${vscode.l10n.t('Gemini CLI')}`,
             description: '',
             cli: 'gemini',
-            detail: `  └ Current OS: ${osLabel}`
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
         }
     ];
 }
@@ -47,9 +47,9 @@ export async function handleUserSelection(
     // Show confirmation dialog with options
     const choice = await vscode.window.showInformationMessage(
         `Setup ${cliName} CLI:`,
-        { modal: true, detail: 'Choose how to proceed with the setup command.' },
-        'Auto Execute',
-        'Copy Command'
+        { modal: true, detail: vscode.l10n.t('Choose how to proceed with the setup command.') },
+        vscode.l10n.t('Run in Terminal'),
+        vscode.l10n.t('Copy to Clipboard')
     );
 
     if (!choice) {
@@ -65,7 +65,7 @@ export async function handleUserSelection(
         baseUrl
     );
 
-    if (choice === 'Auto Execute') {
+    if (choice === vscode.l10n.t('Run in Terminal')) {
         // Auto-execute in terminal without exposing key to clipboard
         const terminal = vscode.window.createTerminal(`${cliName} Setup`);
         terminal.show();
@@ -74,12 +74,12 @@ export async function handleUserSelection(
         vscode.window.showInformationMessage(
             `${cliName} setup is running in the terminal...`
         );
-    } else if (choice === 'Copy Command') {
+    } else if (choice === vscode.l10n.t('Copy to Clipboard')) {
         // Copy to clipboard with warning
         await vscode.env.clipboard.writeText(command);
 
         vscode.window.showWarningMessage(
-            `${cliName} setup command copied to clipboard.\n⚠️  Command contains API key, use with caution.`
+            vscode.l10n.t('The command has been copied to your clipboard!')
         );
     }
 }

@@ -59,7 +59,7 @@ export async function handleTeamProviderSelection(context: vscode.ExtensionConte
 
     // Don't switch if already selected
     if (selectedAlternative.isCurrent) {
-        vscode.window.showInformationMessage('This option is already active.');
+        vscode.window.showInformationMessage(vscode.l10n.t('This option is already active.'));
         return;
     }
 
@@ -69,11 +69,11 @@ export async function handleTeamProviderSelection(context: vscode.ExtensionConte
         const success = await resetTeamSelection(context, provider.providerType);
         if (success) {
             vscode.window.showInformationMessage(
-                `Successfully reset ${provider.providerDisplayName} to use team default`
+                vscode.l10n.t('Successfully reset to team default for {0}', provider.providerDisplayName || '')
             );
         } else {
             vscode.window.showErrorMessage(
-                `Failed to reset ${provider.providerDisplayName}. Please try again.`
+                vscode.l10n.t('Failed to reset to team default. Please try again.')
             );
         }
     } else if (selectedAlternative.alternativeId) {
@@ -81,14 +81,14 @@ export async function handleTeamProviderSelection(context: vscode.ExtensionConte
         const result = await setTeamSelection(context, provider.providerType, selectedAlternative.alternativeId);
         if (result) {
             vscode.window.showInformationMessage(
-                `Successfully switched ${provider.providerDisplayName} to ${selectedAlternative.label.replace(/\$\(check\)\s*/, '')}`
+                vscode.l10n.t('Successfully switched {0} to {1}', provider.providerDisplayName || '', selectedAlternative.label.replace(/\$\(check\)\s*/, ''))
             );
         } else {
             vscode.window.showErrorMessage(
-                `Failed to switch ${provider.providerDisplayName}. Please try again.`
+                vscode.l10n.t('Failed to switch provider. Please try again.')
             );
         }
     } else {
-        vscode.window.showErrorMessage('Invalid alternative selection.');
+        vscode.window.showErrorMessage(vscode.l10n.t('Invalid alternative selection.'));
     }
 }

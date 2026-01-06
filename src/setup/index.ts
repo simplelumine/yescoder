@@ -17,7 +17,7 @@ export async function showCliSetupMenu(context: vscode.ExtensionContext): Promis
         const profile = await fetchBalance(context);
 
         if (!profile) {
-            vscode.window.showErrorMessage('Failed to fetch profile data. Please ensure your API key is set.');
+            vscode.window.showErrorMessage(vscode.l10n.t('Failed to fetch profile data. Please ensure your API key is set.'));
             return;
         }
 
@@ -26,7 +26,7 @@ export async function showCliSetupMenu(context: vscode.ExtensionContext): Promis
         const apiKey = await context.secrets.get('yescode.apiKey');
 
         if (!apiKey) {
-            vscode.window.showErrorMessage('API key not found. Please set your API key first.');
+            vscode.window.showErrorMessage(vscode.l10n.t('API key not found. Please set your API key first.'));
             return;
         }
 
@@ -122,6 +122,6 @@ export async function showCliSetupMenu(context: vscode.ExtensionContext): Promis
         quickPick.show();
     } catch (error) {
         console.error('Error in showCliSetupMenu:', error);
-        vscode.window.showErrorMessage(`Failed to show CLI setup menu: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(vscode.l10n.t('Failed to show CLI setup menu: {0}', error instanceof Error ? error.message : vscode.l10n.t('Unknown error')));
     }
 }

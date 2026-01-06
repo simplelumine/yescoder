@@ -49,13 +49,13 @@ export async function handleUserProviderSelection(context: vscode.ExtensionConte
 
     // Don't switch if already selected
     if (selectedAlternative.isCurrent) {
-        vscode.window.showInformationMessage('This alternative is already selected.');
+        vscode.window.showInformationMessage(vscode.l10n.t('This alternative is already selected.'));
         return;
     }
 
     // Check if alternativeId exists
     if (!selectedAlternative.alternativeId) {
-        vscode.window.showErrorMessage('Invalid alternative selection.');
+        vscode.window.showErrorMessage(vscode.l10n.t('Invalid alternative selection.'));
         return;
     }
 
@@ -64,11 +64,11 @@ export async function handleUserProviderSelection(context: vscode.ExtensionConte
 
     if (result) {
         vscode.window.showInformationMessage(
-            `Successfully switched ${provider.providerDisplayName} to ${selectedAlternative.label.replace('$(check) ', '')}`
+            vscode.l10n.t('Successfully switched {0} to {1}', provider.providerDisplayName || '', selectedAlternative.label.replace('$(check) ', ''))
         );
     } else {
         vscode.window.showErrorMessage(
-            `Failed to switch ${provider.providerDisplayName}. Please try again.`
+            vscode.l10n.t('Failed to switch provider. Please try again.')
         );
     }
 }

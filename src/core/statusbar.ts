@@ -19,7 +19,7 @@ export function createStatusBar(context: vscode.ExtensionContext): vscode.Status
         100
     );
     statusBarItem.command = 'yescode.showMenu';
-    statusBarItem.text = 'YesCode: Loading...';
+    statusBarItem.text = vscode.l10n.t('YesCode: Loading...');
     statusBarItem.show();
 
     return statusBarItem;
@@ -56,8 +56,8 @@ export async function updateStatusBar(context: vscode.ExtensionContext, isAutoRe
 
             if (!data) {
                 // API key not set or returned null - don't retry
-                statusBarItem.text = 'YesCode: Error';
-                statusBarItem.tooltip = 'Failed to fetch balance. Click to retry.';
+                statusBarItem.text = vscode.l10n.t('YesCode: Error');
+                statusBarItem.tooltip = vscode.l10n.t('Failed to fetch balance. Click to retry.');
                 statusBarItem.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
                 return;
             }
@@ -93,8 +93,8 @@ export async function updateStatusBar(context: vscode.ExtensionContext, isAutoRe
 
             if (attempt < MAX_RETRIES) {
                 // Show retrying status in status bar (no notification)
-                statusBarItem.text = `$(sync~spin) YesCode: Retrying (${attempt}/${MAX_RETRIES})...`;
-                statusBarItem.tooltip = `Fetch failed, retrying... (${attempt}/${MAX_RETRIES})`;
+                statusBarItem.text = vscode.l10n.t('Fetch failed, retrying... ({0}/{1})', attempt, MAX_RETRIES);
+                statusBarItem.tooltip = vscode.l10n.t('Fetch failed, retrying... ({0}/{1})', attempt, MAX_RETRIES);
                 statusBarItem.backgroundColor = undefined;
 
                 // Wait before next retry
@@ -105,8 +105,8 @@ export async function updateStatusBar(context: vscode.ExtensionContext, isAutoRe
 
     // All retries exhausted - show error in status bar only (no notification)
     console.error('All retry attempts failed:', lastError?.message);
-    statusBarItem.text = 'YesCode: Fetch Error';
-    statusBarItem.tooltip = `Failed to fetch balance after ${MAX_RETRIES} attempts. Click to retry.\nError: ${lastError?.message || 'Unknown error'}`;
+    statusBarItem.text = vscode.l10n.t('YesCode: Fetch Error');
+    statusBarItem.tooltip = vscode.l10n.t('Failed to fetch balance after {0} attempts. Click to retry.\nError: {1}', MAX_RETRIES, lastError?.message || vscode.l10n.t('Unknown error'));
     statusBarItem.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
 }
 

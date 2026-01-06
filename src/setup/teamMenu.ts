@@ -12,22 +12,22 @@ interface TeamMenuItem extends vscode.QuickPickItem {
 export function buildTeamMenuItems(osLabel: string): TeamMenuItem[] {
     return [
         {
-            label: '$(organization) Claude Code',
+            label: `$(organization) ${vscode.l10n.t('Claude Code')}`,
             description: 'TEAM',
             cli: 'claude',
-            detail: `  └ Current OS: ${osLabel}`
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
         },
         {
-            label: '$(organization) Codex CLI',
+            label: `$(organization) ${vscode.l10n.t('Codex CLI')}`,
             description: 'TEAM',
             cli: 'codex',
-            detail: `  └ Current OS: ${osLabel}`
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
         },
         {
-            label: '$(organization) Gemini CLI',
+            label: `$(organization) ${vscode.l10n.t('Gemini CLI')}`,
             description: 'TEAM',
             cli: 'gemini',
-            detail: `  └ Current OS: ${osLabel}`
+            detail: `  └ ${vscode.l10n.t('Current Session')}: ${osLabel}`
         }
     ];
 }
@@ -47,9 +47,9 @@ export async function handleTeamSelection(
     // Show confirmation dialog with options
     const choice = await vscode.window.showInformationMessage(
         `Setup ${cliName} CLI for Team:`,
-        { modal: true, detail: 'Choose how to proceed with the team setup command.' },
-        'Auto Execute',
-        'Copy Command'
+        { modal: true, detail: vscode.l10n.t('Choose how to proceed with the setup command.') },
+        vscode.l10n.t('Run in Terminal'),
+        vscode.l10n.t('Copy to Clipboard')
     );
 
     if (!choice) {
@@ -65,7 +65,7 @@ export async function handleTeamSelection(
         baseUrl
     );
 
-    if (choice === 'Auto Execute') {
+    if (choice === vscode.l10n.t('Run in Terminal')) {
         // Auto-execute in terminal without exposing team key to clipboard
         const terminal = vscode.window.createTerminal(`${cliName} Team Setup`);
         terminal.show();
@@ -74,12 +74,12 @@ export async function handleTeamSelection(
         vscode.window.showInformationMessage(
             `${cliName} team setup is running in the terminal...`
         );
-    } else if (choice === 'Copy Command') {
+    } else if (choice === vscode.l10n.t('Copy to Clipboard')) {
         // Copy to clipboard with warning
         await vscode.env.clipboard.writeText(command);
 
         vscode.window.showWarningMessage(
-            `${cliName} team setup command copied to clipboard.\n⚠️  Command contains Team API key, use with caution.`
+            vscode.l10n.t('The command has been copied to your clipboard!')
         );
     }
 }

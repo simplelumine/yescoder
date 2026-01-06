@@ -1,0 +1,10 @@
+{
+  "displayName": "YesCoder",
+  "description": "Your essential companion for YesCode in VS Code. Monitor your balance and manage providers seamlessly.",
+  "command.showMenu": "YesCode: Show Menu",
+  "command.setApiKey": "YesCode: Set API Key",
+  "command.refreshBalance": "YesCode: Refresh Balance",
+  "command.switchDisplayMode": "YesCode: Switch Display Mode",
+  "command.switchVendor": "YesCode: Switch Vendor",
+  "command.configureCliEnvironment": "YesCode: One-Click CLI Setup"
+}

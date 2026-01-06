@@ -88,10 +88,10 @@ export async function fetchBalance(context: vscode.ExtensionContext): Promise<Pr
     if (!apiKey) {
         // API key not set - show warning once (this is a configuration issue, not a network error)
         vscode.window.showWarningMessage(
-            'YesCode API Key not set. Please run "YesCode: Set API Key" command.',
-            'Set API Key'
+            vscode.l10n.t('YesCode API Key not set. Please run "YesCode: Set API Key" command.'),
+            vscode.l10n.t('Set API Key')
         ).then(selection => {
-            if (selection === 'Set API Key') {
+            if (selection === vscode.l10n.t('Set API Key')) {
                 vscode.commands.executeCommand('yescode.setApiKey');
             }
         });
@@ -117,28 +117,28 @@ export async function fetchBalance(context: vscode.ExtensionContext): Promise<Pr
 
 export async function setApiKey(context: vscode.ExtensionContext): Promise<void> {
     const apiKey = await vscode.window.showInputBox({
-        prompt: 'Enter your YesCode API Key',
+        prompt: vscode.l10n.t('Enter your YesCode API Key'),
         password: true,
         ignoreFocusOut: true,
-        placeHolder: 'Your API key will be stored securely'
+        placeHolder: vscode.l10n.t('Your API key will be stored securely')
     });
 
     if (!apiKey) {
-        vscode.window.showWarningMessage('API Key not saved');
+        vscode.window.showWarningMessage(vscode.l10n.t('API Key not saved'));
         return;
     }
 
     // Show progress while detecting environment
     const env = await vscode.window.withProgress({
         location: vscode.ProgressLocation.Notification,
-        title: "Validating API Key...",
+        title: vscode.l10n.t('Validating API Key...'),
         cancellable: false
     }, async () => {
         return await detectEnvironment(apiKey);
     });
 
     if (!env) {
-        vscode.window.showErrorMessage('Invalid API Key. Please check and try again.');
+        vscode.window.showErrorMessage(vscode.l10n.t('Invalid API Key. Please check and try again.'));
         return;
     }
 
@@ -146,8 +146,8 @@ export async function setApiKey(context: vscode.ExtensionContext): Promise<void>
     await context.secrets.store('yescode.apiKey', apiKey);
     await context.globalState.update('yescode.environment', env);
 
-    const envName = env === 'production' ? 'Production' : 'Test';
-    vscode.window.showInformationMessage(`API Key saved successfully! (${envName} Environment)`);
+    const envName = env === 'production' ? vscode.l10n.t('Production') : vscode.l10n.t('Test');
+    vscode.window.showInformationMessage(vscode.l10n.t('API Key saved successfully! ({0} Environment)', envName));
 }
 
 // ============================================================================
@@ -158,7 +158,7 @@ export async function getAvailableProviders(context: vscode.ExtensionContext): P
     try {
         const apiKey = await context.secrets.get('yescode.apiKey');
         if (!apiKey) {
-            vscode.window.showWarningMessage('YesCode API Key not set.');
+            vscode.window.showWarningMessage(vscode.l10n.t('YesCode API Key not set.'));
             return null;
         }
 
@@ -177,7 +177,7 @@ export async function getAvailableProviders(context: vscode.ExtensionContext): P
         return await response.json() as AvailableProviderResponse;
     } catch (error) {
         console.error('Error fetching available providers:', error);
-        vscode.window.showErrorMessage(`Failed to fetch providers: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(vscode.l10n.t('Failed to fetch providers: {0}', error instanceof Error ? error.message : vscode.l10n.t('Unknown error')));
         return null;
     }
 }
@@ -207,7 +207,7 @@ export async function getUserProviderAlternatives(context: vscode.ExtensionConte
         return await response.json() as ProviderAlternativesResponse;
     } catch (error) {
         console.error('Error fetching provider alternatives:', error);
-        vscode.window.showErrorMessage(`Failed to fetch alternatives: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(vscode.l10n.t('Failed to fetch alternatives: {0}', error instanceof Error ? error.message : vscode.l10n.t('Unknown error')));
         return null;
     }
 }
@@ -267,7 +267,7 @@ export async function setUserSelection(context: vscode.ExtensionContext, provide
         return await response.json() as ProviderSelectionResponse;
     } catch (error) {
         console.error('Error setting user selection:', error);
-        vscode.window.showErrorMessage(`Failed to update selection: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(vscode.l10n.t('Failed to update selection: {0}', error instanceof Error ? error.message : vscode.l10n.t('Unknown error')));
         return null;
     }
 }
@@ -360,7 +360,7 @@ export async function setTeamSelection(context: vscode.ExtensionContext, provide
         return await response.json() as TeamProviderSelectionResponse;
     } catch (error) {
         console.error('Error setting team selection:', error);
-        vscode.window.showErrorMessage(`Failed to update team selection: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(vscode.l10n.t('Failed to update team selection: {0}', error instanceof Error ? error.message : vscode.l10n.t('Unknown error')));
         return null;
     }
 }
@@ -387,7 +387,7 @@ export async function resetTeamSelection(context: vscode.ExtensionContext, provi
         return true;
     } catch (error) {
         console.error('Error resetting team selection:', error);
-        vscode.window.showErrorMessage(`Failed to reset to team default: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(vscode.l10n.t('Failed to reset to team default: {0}', error instanceof Error ? error.message : vscode.l10n.t('Unknown error')));
         return false;
     }
 }

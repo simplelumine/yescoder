@@ -1,0 +1,10 @@
+{
+  "displayName": "YesCoder",
+  "description": "YesCode 在 VS Code 中的必备助手。无缝监控余额和管理供应商。",
+  "command.showMenu": "YesCode: 显示菜单",
+  "command.setApiKey": "YesCode: 设置 API 密钥",
+  "command.refreshBalance": "YesCode: 刷新余额",
+  "command.switchDisplayMode": "YesCode: 切换显示模式",
+  "command.switchVendor": "YesCode: 切换供应商",
+  "command.configureCliEnvironment": "YesCode: 一键 CLI 设置"
+}

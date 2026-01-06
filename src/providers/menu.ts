@@ -20,7 +20,7 @@ export async function buildProviderMenu(context: vscode.ExtensionContext): Promi
         const availableProviders = await getAvailableProviders(context);
 
         if (!availableProviders) {
-            vscode.window.showErrorMessage('Failed to fetch provider data.');
+            vscode.window.showErrorMessage(vscode.l10n.t('Failed to fetch provider data.'));
             return null;
         }
 
@@ -222,7 +222,7 @@ export async function buildProviderMenu(context: vscode.ExtensionContext): Promi
         }
 
         if (menuItems.length === 0) {
-            vscode.window.showInformationMessage('No providers available to switch.');
+            vscode.window.showInformationMessage(vscode.l10n.t('No providers available to switch.'));
             return null;
         }
 

@@ -8,7 +8,7 @@ export async function showVendorSwitchMenu(context: vscode.ExtensionContext): Pr
     try {
         // Check if provider switching is available (not in test environment)
         if (!await isProviderSwitchingAvailable(context)) {
-            vscode.window.showInformationMessage('Provider switching is not available in Test environment.');
+            vscode.window.showInformationMessage(vscode.l10n.t('Provider switching is not available in Test environment.'));
             return;
         }
 
@@ -37,6 +37,6 @@ export async function showVendorSwitchMenu(context: vscode.ExtensionContext): Pr
         }
     } catch (error) {
         console.error('Error in showVendorSwitchMenu:', error);
-        vscode.window.showErrorMessage(`Failed to switch vendor: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(vscode.l10n.t('Failed to switch vendor: {0}', error instanceof Error ? error.message : vscode.l10n.t('Unknown error')));
     }
 }

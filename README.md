@@ -27,7 +27,7 @@ Your essential companion for YesCode in VS Code. Monitor your balance and manage
 
 ## Commands
 
--   **`YesCode: One-Click CLI Setup...`**: Opens the CLI setup helper.
+-   **`YesCode: One-Click CLI Setup`**: Opens the CLI setup helper.
 -   **`YesCode: Show Menu`**: Opens the main command menu from the status bar.
 -   **`YesCode: Refresh Balance`**: Manually refreshes your balance information.
 -   **`YesCode: Switch Display Mode`**: Manually selects which balance to display.
@@ -46,6 +46,7 @@ This extension is built with a clean, feature-driven architecture:
 -   `src/core/`: Contains the core logic for command registration and status bar creation.
 -   `src/monitor/`: All logic for the balance monitoring feature.
 -   `src/providers/`: All logic for the provider management feature.
+-   `src/setup/`: All logic for the CLI setup helper feature.
 -   `src/api.ts`: Manages all API calls to YesCode, including environment detection.
 -   `src/types.ts`: Defines all shared data structures.
 
