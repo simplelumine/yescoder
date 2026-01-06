@@ -7,8 +7,6 @@
   "Manually refresh balance data": "Manually refresh balance data",
   "Switch Display Mode": "Switch Display Mode",
   "Change between Auto/Subscription/PayGo/Team modes": "Change between Auto/Subscription/PayGo/Team modes",
-  "Switch Vendor": "Switch Vendor",
-  "Change provider vendor settings": "Change provider vendor settings",
   "Set API Key": "Set API Key",
   "Configure your YesCode API key": "Configure your YesCode API key",
   "One-Click CLI Setup...": "One-Click CLI Setup...",
@@ -81,14 +79,6 @@
   "Copy to Clipboard": "Copy to Clipboard",
   "The command has been copied to your clipboard!": "The command has been copied to your clipboard!",
   "Failed to copy command to clipboard.": "Failed to copy command to clipboard.",
-  "Custom": "Custom",
-  "Enter custom environment variable name": "Enter custom environment variable name",
-  "e.g., OPENAI_API_KEY": "e.g., OPENAI_API_KEY",
-  "Select Setup Type": "Select Setup Type",
-  "Set for current session only": "Set for current session only",
-  "Persist across sessions": "Persist across sessions",
   "Current Session": "Current Session",
-  "Permanent": "Permanent",
-  "Switch Language": "Switch Language",
-  "Change YesCoder display language": "Change YesCoder display language"
+  "Choose how to proceed with the setup command.": "Choose how to proceed with the setup command."
 }

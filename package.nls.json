@@ -5,6 +5,5 @@
   "command.setApiKey": "YesCode: Set API Key",
   "command.refreshBalance": "YesCode: Refresh Balance",
   "command.switchDisplayMode": "YesCode: Switch Display Mode",
-  "command.switchVendor": "YesCode: Switch Vendor",
   "command.configureCliEnvironment": "YesCode: One-Click CLI Setup"
 }
