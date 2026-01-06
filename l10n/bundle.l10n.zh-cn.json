@@ -88,5 +88,18 @@
   "The command has been copied to your clipboard!": "命令已复制到剪贴板！",
   "Failed to copy command to clipboard.": "复制命令到剪贴板失败。",
   "Current Session": "当前会话",
-  "Choose how to proceed with the setup command.": "选择如何执行设置命令。"
+  "Choose how to proceed with the setup command.": "选择如何执行设置命令。",
+  "Subs": "订阅",
+  "Pgo": "按量",
+  "Subscription Mode": "订阅模式",
+  "Team Mode": "团队模式",
+  "Pay-as-you-go Mode": "按量付费模式",
+  "Plan": "套餐",
+  "Group": "团队",
+  "Daily": "日额度",
+  "Weekly": "周额度",
+  "Reset": "重置",
+  "Expiry": "到期",
+  "Balance": "余额",
+  "Click to open menu": "点击打开菜单"
 }

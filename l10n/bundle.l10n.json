@@ -88,5 +88,18 @@
   "The command has been copied to your clipboard!": "The command has been copied to your clipboard!",
   "Failed to copy command to clipboard.": "Failed to copy command to clipboard.",
   "Current Session": "Current Session",
-  "Choose how to proceed with the setup command.": "Choose how to proceed with the setup command."
+  "Choose how to proceed with the setup command.": "Choose how to proceed with the setup command.",
+  "Subs": "Subs",
+  "Pgo": "Pgo",
+  "Subscription Mode": "Subscription Mode",
+  "Team Mode": "Team Mode",
+  "Pay-as-you-go Mode": "Pay-as-you-go Mode",
+  "Plan": "Plan",
+  "Group": "Group",
+  "Daily": "Daily",
+  "Weekly": "Weekly",
+  "Reset": "Reset",
+  "Expiry": "Expiry",
+  "Balance": "Balance",
+  "Click to open menu": "Click to open menu"
 }

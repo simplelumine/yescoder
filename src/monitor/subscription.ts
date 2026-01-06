@@ -1,3 +1,4 @@
+import * as vscode from 'vscode';
 import { ProfileResponse, BalanceResult } from '../types';
 import { formatDate, calculateNextReset, getDaysUntil } from './utils';
 
@@ -35,40 +36,37 @@ export function calculateSubscriptionBalance(profile: ProfileResponse, reverseDi
     if (isCriticalDaily) {
         displayPercentage = dailyPercentage;
         if (reverseDisplay) {
-            // Inverted: Show Used %
             const usedPercentage = 100 - dailyPercentage;
             displayTextValues = `${usedPercentage.toFixed(0)}%`;
         } else {
-            // Normal: Show Remaining %
             displayTextValues = `${dailyPercentage.toFixed(0)}%`;
         }
     } else {
         displayPercentage = weeklyPercentage;
         if (reverseDisplay) {
-            // Inverted: Show Used %
             const usedPercentage = 100 - weeklyPercentage;
             displayTextValues = `${usedPercentage.toFixed(0)}%`;
         } else {
-            // Normal: Show Remaining %
             displayTextValues = `${weeklyPercentage.toFixed(0)}%`;
         }
     }
 
     const tooltip = [
-        `Subscription Mode`,
-        `Plan: ${subscription_plan.name}`,
-        `Daily: $${subscription_balance.toFixed(2)} / $${subscription_plan.daily_balance.toFixed(2)} (${dailyPercentage.toFixed(1)}%)`,
-        `Weekly: $${weeklyRemaining.toFixed(2)} / $${subscription_plan.weekly_limit.toFixed(2)} (${weeklyPercentage.toFixed(1)}%)`,
-        `Reset: ${nextReset} (${resetRelative})`,
-        `Expiry: ${expiryDate} (${expiryRelative})`,
+        vscode.l10n.t('Subscription Mode'),
+        `${vscode.l10n.t('Plan')}: ${subscription_plan.name}`,
+        `${vscode.l10n.t('Daily')}: $${subscription_balance.toFixed(2)} / $${subscription_plan.daily_balance.toFixed(2)} (${dailyPercentage.toFixed(1)}%)`,
+        `${vscode.l10n.t('Weekly')}: $${weeklyRemaining.toFixed(2)} / $${subscription_plan.weekly_limit.toFixed(2)} (${weeklyPercentage.toFixed(1)}%)`,
+        `${vscode.l10n.t('Reset')}: ${nextReset} (${resetRelative})`,
+        `${vscode.l10n.t('Expiry')}: ${expiryDate} (${expiryRelative})`,
         ``,
-        'Click to open menu'
+        vscode.l10n.t('Click to open menu')
     ].join('\n');
 
     return {
         type: isCriticalDaily ? 'daily' : 'weekly',
-        percentage: displayPercentage, // Always return REMAINING percentage for color logic
-        displayText: `YesCode Subs: ${displayTextValues}`,
+        percentage: displayPercentage,
+        displayText: `YesCode ${vscode.l10n.t('Subs')}: ${displayTextValues}`,
         tooltip
     };
 }
+
