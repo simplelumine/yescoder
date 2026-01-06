@@ -23,7 +23,7 @@
   </p>
   
   <p>
-    <a href="./README.md">English Documentation</a>
+    <a href="https://github.com/simplelumine/yescoder/blob/main/README.md">English Documentation</a>
   </p>
 </div>
 

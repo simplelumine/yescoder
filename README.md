@@ -23,7 +23,7 @@
   </p>
 
   <p>
-    <a href="./README_zh-CN.md">中文文档</a>
+    <a href="https://github.com/simplelumine/yescoder/blob/main/README_zh-CN.md">中文文档</a>
   </p>
 </div>
 
