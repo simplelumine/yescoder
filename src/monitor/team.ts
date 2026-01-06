@@ -1,7 +1,7 @@
 import { ProfileResponse, BalanceResult } from '../types';
 import { formatDate, calculateNextReset, getDaysUntil } from './utils';
 
-export function calculateTeamBalance(profile: ProfileResponse): BalanceResult {
+export function calculateTeamBalance(profile: ProfileResponse, reverseDisplay: boolean = false): BalanceResult {
     const { current_team, team_membership } = profile;
 
     if (!current_team || !team_membership) {
@@ -29,6 +29,31 @@ export function calculateTeamBalance(profile: ProfileResponse): BalanceResult {
     // Display the smaller percentage (more critical)
     const shouldShowDaily = dailyPercentage <= weeklyPercentage;
 
+    let displayPercentage: number;
+    let displayTextValues: string;
+
+    if (shouldShowDaily) {
+        displayPercentage = dailyPercentage;
+        if (reverseDisplay) {
+            // Inverted: Show Used %
+            const usedPercentage = 100 - dailyPercentage;
+            displayTextValues = `${usedPercentage.toFixed(0)}%`;
+        } else {
+             // Normal: Show Remaining %
+            displayTextValues = `${dailyPercentage.toFixed(0)}%`;
+        }
+    } else {
+        displayPercentage = weeklyPercentage;
+        if (reverseDisplay) {
+             // Inverted: Show Used %
+            const usedPercentage = 100 - weeklyPercentage;
+            displayTextValues = `${usedPercentage.toFixed(0)}%`;
+        } else {
+             // Normal: Show Remaining %
+            displayTextValues = `${weeklyPercentage.toFixed(0)}%`;
+        }
+    }
+
     const tooltip = [
         `Team Mode`,
         `Group: ${current_team.name}`,
@@ -40,20 +65,10 @@ export function calculateTeamBalance(profile: ProfileResponse): BalanceResult {
         'Click to open menu'
     ].join('\n');
 
-    // Return the smaller percentage (more critical)
-    if (shouldShowDaily) {
-        return {
-            type: 'daily',
-            percentage: dailyPercentage,
-            displayText: `YesCode Team: ${dailyPercentage.toFixed(0)}%`,
-            tooltip
-        };
-    } else {
-        return {
-            type: 'weekly',
-            percentage: weeklyPercentage,
-            displayText: `YesCode Team: ${weeklyPercentage.toFixed(0)}%`,
-            tooltip
-        };
-    }
+    return {
+        type: shouldShowDaily ? 'daily' : 'weekly',
+        percentage: displayPercentage, // Always return REMAINING percentage for color logic
+        displayText: `YesCode Team: ${displayTextValues}`,
+        tooltip
+    };
 }

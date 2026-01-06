@@ -5,5 +5,8 @@
   "command.setApiKey": "YesCode: Set API Key",
   "command.refreshBalance": "YesCode: Refresh Balance",
   "command.switchDisplayMode": "YesCode: Switch Display Mode",
-  "command.configureCliEnvironment": "YesCode: One-Click CLI Setup"
+  "command.configureCliEnvironment": "YesCode: One-Click CLI Setup",
+  "command.switchVendor": "YesCode: Switch Vendor",
+  "config.apiKey": "Your YesCode API Key",
+  "config.reverseDisplay": "Reverse the percentage display in the status bar (Show 'Used' instead of 'Remaining')"
 }

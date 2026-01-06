@@ -63,7 +63,10 @@ export async function updateStatusBar(context: vscode.ExtensionContext, isAutoRe
             }
 
             // Success - update status bar with balance
-            const result = calculateBalance(data, currentDisplayMode);
+            // Success - update status bar with balance
+            const config = vscode.workspace.getConfiguration('yescode');
+            const reverseDisplay = config.get<boolean>('reverseDisplay', false);
+            const result = calculateBalance(data, currentDisplayMode, reverseDisplay);
 
             statusBarItem.text = result.displayText;
             statusBarItem.tooltip = result.tooltip;

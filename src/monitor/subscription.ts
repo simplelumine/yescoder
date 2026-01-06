@@ -1,7 +1,7 @@
 import { ProfileResponse, BalanceResult } from '../types';
 import { formatDate, calculateNextReset, getDaysUntil } from './utils';
 
-export function calculateSubscriptionBalance(profile: ProfileResponse): BalanceResult {
+export function calculateSubscriptionBalance(profile: ProfileResponse, reverseDisplay: boolean = false): BalanceResult {
     const {
         subscription_balance,
         pay_as_you_go_balance,
@@ -29,6 +29,31 @@ export function calculateSubscriptionBalance(profile: ProfileResponse): BalanceR
     const weeklyPercentage = (weeklyRemaining / subscription_plan.weekly_limit) * 100;
     const isCriticalDaily = dailyPercentage <= weeklyPercentage;
 
+    let displayPercentage: number;
+    let displayTextValues: string;
+
+    if (isCriticalDaily) {
+        displayPercentage = dailyPercentage;
+        if (reverseDisplay) {
+            // Inverted: Show Used %
+            const usedPercentage = 100 - dailyPercentage;
+            displayTextValues = `${usedPercentage.toFixed(0)}%`;
+        } else {
+            // Normal: Show Remaining %
+            displayTextValues = `${dailyPercentage.toFixed(0)}%`;
+        }
+    } else {
+        displayPercentage = weeklyPercentage;
+        if (reverseDisplay) {
+            // Inverted: Show Used %
+            const usedPercentage = 100 - weeklyPercentage;
+            displayTextValues = `${usedPercentage.toFixed(0)}%`;
+        } else {
+            // Normal: Show Remaining %
+            displayTextValues = `${weeklyPercentage.toFixed(0)}%`;
+        }
+    }
+
     const tooltip = [
         `Subscription Mode`,
         `Plan: ${subscription_plan.name}`,
@@ -40,19 +65,10 @@ export function calculateSubscriptionBalance(profile: ProfileResponse): BalanceR
         'Click to open menu'
     ].join('\n');
 
-    if (isCriticalDaily) {
-        return {
-            type: 'daily',
-            percentage: dailyPercentage,
-            displayText: `YesCode Subs: ${dailyPercentage.toFixed(0)}%`,
-            tooltip
-        };
-    } else {
-        return {
-            type: 'weekly',
-            percentage: weeklyPercentage,
-            displayText: `YesCode Subs: ${weeklyPercentage.toFixed(0)}%`,
-            tooltip
-        };
-    }
+    return {
+        type: isCriticalDaily ? 'daily' : 'weekly',
+        percentage: displayPercentage, // Always return REMAINING percentage for color logic
+        displayText: `YesCode Subs: ${displayTextValues}`,
+        tooltip
+    };
 }

@@ -5,5 +5,8 @@
   "command.setApiKey": "YesCode: 设置 API 密钥",
   "command.refreshBalance": "YesCode: 刷新余额",
   "command.switchDisplayMode": "YesCode: 切换显示模式",
-  "command.configureCliEnvironment": "YesCode: 一键 CLI 环境配置"
+  "command.configureCliEnvironment": "YesCode: 一键 CLI 环境配置",
+  "command.switchVendor": "YesCode: 切换供应商",
+  "config.apiKey": "您的 YesCode API 密钥",
+  "config.reverseDisplay": "反转状态栏百分比显示（显示“已用”而非“剩余”）"
 }

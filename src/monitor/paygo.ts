@@ -13,7 +13,7 @@ export function calculatePayGoBalance(profile: ProfileResponse): BalanceResult {
     return {
         type: 'payGo',
         percentage: pay_as_you_go_balance,
-        displayText: `YesCode PGO: $${pay_as_you_go_balance.toFixed(1)}`,
+        displayText: `YesCode Pgo: $${pay_as_you_go_balance.toFixed(1)}`,
         tooltip
     };
 }
