@@ -2,8 +2,8 @@ import * as vscode from 'vscode';
 import { ProfileResponse } from '../types';
 import { DisplayMode } from '../monitor/balance';
 
-export function buildMainMenu(showProviderSwitch: boolean = true): vscode.QuickPickItem[] {
-    const items: vscode.QuickPickItem[] = [
+export function buildMainMenu(): vscode.QuickPickItem[] {
+    return [
         {
             label: `$(sync) ${vscode.l10n.t('Refresh Balance')}`,
             description: vscode.l10n.t('Manually refresh balance data')
@@ -11,33 +11,16 @@ export function buildMainMenu(showProviderSwitch: boolean = true): vscode.QuickP
         {
             label: `$(symbol-color) ${vscode.l10n.t('Switch Display Mode')}`,
             description: vscode.l10n.t('Change between Auto/Subscription/PayGo/Team modes')
+        },
+        {
+            label: `$(key) ${vscode.l10n.t('Set API Key')}`,
+            description: vscode.l10n.t('Configure your YesCode API key')
+        },
+        {
+            label: `$(rocket) ${vscode.l10n.t('One-Click CLI Setup...')}`,
+            description: vscode.l10n.t('Auto-execute or copy setup commands')
         }
     ];
-
-    // Only show provider switching in production environment
-    if (showProviderSwitch) {
-        items.push({
-            label: `$(arrow-swap) ${vscode.l10n.t('Switch Vendor')}`,
-            description: vscode.l10n.t('Change provider vendor settings')
-        });
-    }
-
-    items.push({
-        label: `$(key) ${vscode.l10n.t('Set API Key')}`,
-        description: vscode.l10n.t('Configure your YesCode API key')
-    });
-
-    items.push({
-        label: `$(rocket) ${vscode.l10n.t('One-Click CLI Setup...')}`,
-        description: vscode.l10n.t('Auto-execute or copy setup commands')
-    });
-
-    items.push({
-        label: `$(globe) ${vscode.l10n.t('Switch Language')}`,
-        description: vscode.l10n.t('Change YesCoder display language')
-    });
-
-    return items;
 }
 
 export function buildDisplayModeMenu(profile: ProfileResponse, currentDisplayMode: DisplayMode): vscode.QuickPickItem[] {

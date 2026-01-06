@@ -3,7 +3,7 @@
   "displayName": "%displayName%",
   "publisher": "simplelumine",
   "description": "%description%",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "icon": "logo.png",
   "repository": {
@@ -38,10 +38,6 @@
       {
         "command": "yescode.switchDisplayMode",
         "title": "%command.switchDisplayMode%"
-      },
-      {
-        "command": "yescode.switchVendor",
-        "title": "%command.switchVendor%"
       },
       {
         "command": "yescode.configureCliEnvironment",

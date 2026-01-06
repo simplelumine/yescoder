@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
-import { fetchBalance, setApiKey, isProviderSwitchingAvailable } from '../api';
+import { fetchBalance, setApiKey } from '../api';
 import { DisplayMode } from '../monitor/balance';
-import { showVendorSwitchMenu } from '../providers';
 import { updateStatusBar, setDisplayMode, getDisplayMode } from './statusbar';
 import { buildMainMenu, buildDisplayModeMenu } from './menu';
 
@@ -30,16 +29,11 @@ export function registerCommands(context: vscode.ExtensionContext): void {
         })
     );
 
-    context.subscriptions.push(
-        vscode.commands.registerCommand('yescode.switchVendor', async () => {
-            await handleSwitchVendor(context);
-        })
-    );
+
 }
 
 async function handleShowMenu(context: vscode.ExtensionContext): Promise<void> {
-    const showProviderSwitch = await isProviderSwitchingAvailable(context);
-    const items = buildMainMenu(showProviderSwitch);
+    const items = buildMainMenu();
 
     const selected = await vscode.window.showQuickPick(items, {
         placeHolder: vscode.l10n.t('YesCode Menu')
@@ -50,14 +44,10 @@ async function handleShowMenu(context: vscode.ExtensionContext): Promise<void> {
             await vscode.commands.executeCommand('yescode.refreshBalance');
         } else if (selected.label.includes('Switch Display Mode')) {
             await vscode.commands.executeCommand('yescode.switchDisplayMode');
-        } else if (selected.label.includes('Switch Vendor')) {
-            await vscode.commands.executeCommand('yescode.switchVendor');
         } else if (selected.label.includes('Set API Key')) {
             await vscode.commands.executeCommand('yescode.setApiKey');
         } else if (selected.label.includes('One-Click CLI Setup')) {
             await vscode.commands.executeCommand('yescode.configureCliEnvironment');
-        } else if (selected.label.includes('Switch Language')) {
-            await vscode.commands.executeCommand('workbench.action.configureLocale');
         }
     }
 }
@@ -133,6 +123,3 @@ async function handleSwitchDisplayMode(context: vscode.ExtensionContext): Promis
     }
 }
 
-async function handleSwitchVendor(context: vscode.ExtensionContext): Promise<void> {
-    await showVendorSwitchMenu(context);
-}
