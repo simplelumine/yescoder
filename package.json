@@ -47,7 +47,18 @@
         "command": "yescode.configureCliEnvironment",
         "title": "%command.configureCliEnvironment%"
       }
-    ]
+
+    ],
+    "configuration": {
+      "title": "YesCoder",
+      "properties": {
+        "yescode.reverseDisplay": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.reverseDisplay%"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
