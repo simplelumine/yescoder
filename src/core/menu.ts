@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { ProfileResponse } from '../types';
 import { DisplayMode } from '../monitor/balance';
 
-export function buildMainMenu(): vscode.QuickPickItem[] {
+export function buildMainMenu(reverseDisplay: boolean = false): vscode.QuickPickItem[] {
     return [
         {
             label: `$(sync) ${vscode.l10n.t('Refresh Balance')}`,
@@ -23,6 +23,10 @@ export function buildMainMenu(): vscode.QuickPickItem[] {
         {
             label: `$(rocket) ${vscode.l10n.t('One-Click CLI Setup...')}`,
             description: vscode.l10n.t('Auto-execute or copy setup commands')
+        },
+        {
+            label: `$(settings-gear) ${vscode.l10n.t('Reverse Display')}`,
+            description: reverseDisplay ? `✓ ${vscode.l10n.t('Enabled')}` : vscode.l10n.t('Disabled')
         }
     ];
 }

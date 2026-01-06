@@ -37,7 +37,9 @@ export function registerCommands(context: vscode.ExtensionContext): void {
 }
 
 async function handleShowMenu(context: vscode.ExtensionContext): Promise<void> {
-    const items = buildMainMenu();
+    const config = vscode.workspace.getConfiguration('yescode');
+    const reverseDisplay = config.get<boolean>('reverseDisplay', false);
+    const items = buildMainMenu(reverseDisplay);
 
     const selected = await vscode.window.showQuickPick(items, {
         placeHolder: vscode.l10n.t('YesCode Menu')
@@ -54,6 +56,11 @@ async function handleShowMenu(context: vscode.ExtensionContext): Promise<void> {
             await vscode.commands.executeCommand('yescode.setApiKey');
         } else if (selected.label.includes('One-Click CLI Setup')) {
             await vscode.commands.executeCommand('yescode.configureCliEnvironment');
+        } else if (selected.label.includes('Reverse Display')) {
+            // Toggle the setting
+            await config.update('reverseDisplay', !reverseDisplay, vscode.ConfigurationTarget.Global);
+            // Refresh status bar to apply change
+            await updateStatusBar(context, false);
         }
     }
 }
