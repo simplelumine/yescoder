@@ -51,11 +51,21 @@ export function calculateSubscriptionBalance(profile: ProfileResponse, reverseDi
         }
     }
 
+    // Calculate display values for tooltip based on reverseDisplay
+    const displayDailyPct = reverseDisplay ? (100 - dailyPercentage) : dailyPercentage;
+    const displayWeeklyPct = reverseDisplay ? (100 - weeklyPercentage) : weeklyPercentage;
+    
+    // Calculate display amounts (remaining or used)
+    const dailySpent = subscription_plan.daily_balance - subscription_balance;
+    const weeklySpent = current_week_spend;
+    const displayDailyAmount = reverseDisplay ? dailySpent : subscription_balance;
+    const displayWeeklyAmount = reverseDisplay ? weeklySpent : weeklyRemaining;
+
     const tooltip = [
         vscode.l10n.t('Subscription Mode'),
         `${vscode.l10n.t('Plan')}: ${subscription_plan.name}`,
-        `${vscode.l10n.t('Daily')}: $${subscription_balance.toFixed(2)} / $${subscription_plan.daily_balance.toFixed(2)} (${dailyPercentage.toFixed(1)}%)`,
-        `${vscode.l10n.t('Weekly')}: $${weeklyRemaining.toFixed(2)} / $${subscription_plan.weekly_limit.toFixed(2)} (${weeklyPercentage.toFixed(1)}%)`,
+        `${vscode.l10n.t('Daily')}: $${displayDailyAmount.toFixed(2)} / $${subscription_plan.daily_balance.toFixed(2)} (${displayDailyPct.toFixed(1)}%)`,
+        `${vscode.l10n.t('Weekly')}: $${displayWeeklyAmount.toFixed(2)} / $${subscription_plan.weekly_limit.toFixed(2)} (${displayWeeklyPct.toFixed(1)}%)`,
         `${vscode.l10n.t('Reset')}: ${nextReset} (${resetRelative})`,
         `${vscode.l10n.t('Expiry')}: ${expiryDate} (${expiryRelative})`,
         ``,

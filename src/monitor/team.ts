@@ -50,11 +50,19 @@ export function calculateTeamBalance(profile: ProfileResponse, reverseDisplay: b
         }
     }
 
+    // Calculate display values for tooltip based on reverseDisplay
+    const displayDailyPct = reverseDisplay ? (100 - dailyPercentage) : dailyPercentage;
+    const displayWeeklyPct = reverseDisplay ? (100 - weeklyPercentage) : weeklyPercentage;
+    
+    // Calculate display amounts (remaining or used)
+    const displayDailyAmount = reverseDisplay ? dailySpent : dailyRemaining;
+    const displayWeeklyAmount = reverseDisplay ? weeklySpent : weeklyRemaining;
+
     const tooltip = [
         vscode.l10n.t('Team Mode'),
         `${vscode.l10n.t('Group')}: ${current_team.name}`,
-        `${vscode.l10n.t('Daily')}: $${dailyRemaining.toFixed(2)} / $${dailyBalance.toFixed(2)} (${dailyPercentage.toFixed(1)}%)`,
-        `${vscode.l10n.t('Weekly')}: $${weeklyRemaining.toFixed(2)} / $${weeklyLimit.toFixed(2)} (${weeklyPercentage.toFixed(1)}%)`,
+        `${vscode.l10n.t('Daily')}: $${displayDailyAmount.toFixed(2)} / $${dailyBalance.toFixed(2)} (${displayDailyPct.toFixed(1)}%)`,
+        `${vscode.l10n.t('Weekly')}: $${displayWeeklyAmount.toFixed(2)} / $${weeklyLimit.toFixed(2)} (${displayWeeklyPct.toFixed(1)}%)`,
         `${vscode.l10n.t('Reset')}: ${nextReset} (${resetRelative})`,
         `${vscode.l10n.t('Expiry')}: ${expiryDate} (${expiryRelative})`,
         ``,
