@@ -29,7 +29,11 @@ export function registerCommands(context: vscode.ExtensionContext): void {
         })
     );
 
-
+    context.subscriptions.push(
+        vscode.commands.registerCommand('yescode.switchVendor', async () => {
+            await handleSwitchVendor();
+        })
+    );
 }
 
 async function handleShowMenu(context: vscode.ExtensionContext): Promise<void> {
@@ -44,6 +48,8 @@ async function handleShowMenu(context: vscode.ExtensionContext): Promise<void> {
             await vscode.commands.executeCommand('yescode.refreshBalance');
         } else if (selected.label.includes('Switch Display Mode')) {
             await vscode.commands.executeCommand('yescode.switchDisplayMode');
+        } else if (selected.label.includes('Switch Vendor')) {
+            await vscode.commands.executeCommand('yescode.switchVendor');
         } else if (selected.label.includes('Set API Key')) {
             await vscode.commands.executeCommand('yescode.setApiKey');
         } else if (selected.label.includes('One-Click CLI Setup')) {
@@ -123,3 +129,8 @@ async function handleSwitchDisplayMode(context: vscode.ExtensionContext): Promis
     }
 }
 
+async function handleSwitchVendor(): Promise<void> {
+    vscode.window.showWarningMessage(
+        vscode.l10n.t('This feature has been deprecated. Please use the web dashboard to switch vendors.')
+    );
+}

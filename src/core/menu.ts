@@ -13,6 +13,10 @@ export function buildMainMenu(): vscode.QuickPickItem[] {
             description: vscode.l10n.t('Change between Auto/Subscription/PayGo/Team modes')
         },
         {
+            label: `$(arrow-swap) ${vscode.l10n.t('Switch Vendor')}`,
+            description: `⚠️ ${vscode.l10n.t('Deprecated')}`
+        },
+        {
             label: `$(key) ${vscode.l10n.t('Set API Key')}`,
             description: vscode.l10n.t('Configure your YesCode API key')
         },

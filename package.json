@@ -40,6 +40,10 @@
         "title": "%command.switchDisplayMode%"
       },
       {
+        "command": "yescode.switchVendor",
+        "title": "%command.switchVendor%"
+      },
+      {
         "command": "yescode.configureCliEnvironment",
         "title": "%command.configureCliEnvironment%"
       }
