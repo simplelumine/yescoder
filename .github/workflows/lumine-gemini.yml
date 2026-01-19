@@ -1,4 +1,4 @@
-name: "✨ Gemini"
+name: "✦ Lumine Gemini"
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ on:
 jobs:
   dispatch:
     if: ${{ github.event_name != 'schedule' && github.event_name != 'workflow_dispatch' }}
-    uses: simplelumine/gemini-lumine/.github/workflows/gemini-dispatch.yml@main
+    uses: simplelumine/lumine-gemini/.github/workflows/gemini-dispatch.yml@main
     secrets: inherit
     permissions:
       contents: write
@@ -36,7 +36,7 @@ jobs:
 
   scheduled-triage:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
-    uses: simplelumine/gemini-lumine/.github/workflows/gemini-scheduled-triage.yml@main
+    uses: simplelumine/lumine-gemini/.github/workflows/gemini-scheduled-triage.yml@main
     secrets: inherit
     permissions:
       contents: read
