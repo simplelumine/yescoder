@@ -8,7 +8,7 @@ let currentDisplayMode: DisplayMode = 'auto';
 
 // Retry configuration
 const MAX_RETRIES = 3;
-const RETRY_DELAY_MS = 5000; // 5 seconds between retries
+const RETRY_DELAY_MS = 10000; // 10 seconds between retries
 
 export function createStatusBar(context: vscode.ExtensionContext): vscode.StatusBarItem {
     // Load saved display mode
@@ -33,7 +33,7 @@ export function startAutoRefresh(context: vscode.ExtensionContext): void {
     refreshTimer = setInterval(() => {
         console.log('Automatic refresh triggered...');
         updateStatusBar(context, true); // Automatic refresh
-    }, 1 * 60 * 1000); // 1 minute in milliseconds
+    }, 90 * 1000); // 90 seconds in milliseconds
 }
 
 export function stopAutoRefresh(): void {
