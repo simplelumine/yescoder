@@ -111,7 +111,7 @@ export async function updateStatusBar(context: vscode.ExtensionContext, isAutoRe
 
     let errorDetail = '';
     if (lastError?.message) {
-        const match = lastError.message.match(/status:\s*(\d+)/i);
+        const match = lastError.message.match(/status:\s*(\d{3})/i);
         if (match) {
             errorDetail = `HTTP ${match[1]}`;
         }
