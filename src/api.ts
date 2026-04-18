@@ -12,11 +12,12 @@ import {
 // Environment Detection
 // ============================================================================
 
-export type Environment = 'production' | 'test';
+export type Environment = 'production' | 'test' | 'fallback';
 
 const ENVIRONMENTS = {
     production: 'https://co.yes.vg',
-    test: 'https://cotest.yes.vg'
+    test: 'https://cotest.yes.vg',
+    fallback: 'https://co-cdn.yes.vg'
 };
 
 /**
@@ -25,7 +26,7 @@ const ENVIRONMENTS = {
 async function detectEnvironment(apiKey: string): Promise<Environment | null> {
     console.log('Detecting environment for API key...');
 
-    // Test both environments concurrently
+    // Test all environments concurrently
     const results = await Promise.allSettled([
         fetch(`${ENVIRONMENTS.production}/api/v1/auth/profile`, {
             method: 'GET',
@@ -34,15 +35,25 @@ async function detectEnvironment(apiKey: string): Promise<Environment | null> {
         fetch(`${ENVIRONMENTS.test}/api/v1/auth/profile`, {
             method: 'GET',
             headers: { 'X-API-Key': apiKey }
+        }),
+        fetch(`${ENVIRONMENTS.fallback}/api/v1/auth/profile`, {
+            method: 'GET',
+            headers: { 'X-API-Key': apiKey }
         })
     ]);
 
-    const [prodResult, testResult] = results;
+    const [prodResult, testResult, fallbackResult] = results;
 
     // Check production environment
     if (prodResult.status === 'fulfilled' && prodResult.value.ok) {
         console.log('✓ API key belongs to PRODUCTION environment');
         return 'production';
+    }
+
+    // Check fallback environment
+    if (fallbackResult.status === 'fulfilled' && fallbackResult.value.ok) {
+        console.log('✓ API key belongs to FALLBACK environment');
+        return 'fallback';
     }
 
     // Check test environment
@@ -51,7 +62,7 @@ async function detectEnvironment(apiKey: string): Promise<Environment | null> {
         return 'test';
     }
 
-    console.log('✗ API key is invalid in both environments');
+    console.log('✗ API key is invalid in all environments');
     return null;
 }
 
@@ -146,7 +157,7 @@ export async function setApiKey(context: vscode.ExtensionContext): Promise<void>
     await context.secrets.store('yescode.apiKey', apiKey);
     await context.globalState.update('yescode.environment', env);
 
-    const envName = env === 'production' ? vscode.l10n.t('Production') : vscode.l10n.t('Test');
+    const envName = env === 'production' ? vscode.l10n.t('Production') : (env === 'fallback' ? vscode.l10n.t('Fallback') : vscode.l10n.t('Test'));
     vscode.window.showInformationMessage(vscode.l10n.t('API Key saved successfully! ({0} Environment)', envName));
 }
 
