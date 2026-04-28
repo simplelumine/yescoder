@@ -67,6 +67,10 @@ You can configure YesCoder in your VS Code settings or via the command menu.
 - **`YesCode: Set API Key`**: Stores your API key securely.
 - _(Deprecated)_ **`YesCode: Switch Vendor`**: This command is deprecated. Please use the web dashboard.
 
+## API Documentation
+
+For developers looking to integrate or understand the underlying API endpoints used by this extension (including detailed JSON structures and request examples), please refer to the [API Endpoints Documentation](./api.md).
+
 ## Project Architecture
 
 This extension is built with a clean, feature-driven architecture:
