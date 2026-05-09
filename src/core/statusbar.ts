@@ -110,8 +110,19 @@ export async function updateStatusBar(context: vscode.ExtensionContext, isAutoRe
 
     // All retries exhausted - show error in status bar only (no notification)
     console.error('All retry attempts failed:', lastError?.message);
-    statusBarItem.text = vscode.l10n.t('YesCode: Fetch Error');
-    statusBarItem.tooltip = vscode.l10n.t('Failed to fetch balance after {0} attempts. Click to retry.\nError: {1}', MAX_RETRIES, lastError?.message || vscode.l10n.t('Unknown error'));
+    
+    const errorMsg = lastError?.message || vscode.l10n.t('Unknown error');
+    let displayError = errorMsg;
+    if (errorMsg.includes('HTTP error! status:')) {
+        displayError = `HTTP ${errorMsg.split('status: ')[1]}`;
+    } else if (errorMsg.includes('fetch failed')) {
+        displayError = 'Network Error';
+    } else if (errorMsg.length > 15) {
+        displayError = errorMsg.substring(0, 15) + '...';
+    }
+
+    statusBarItem.text = `$(error) ${displayError}`;
+    statusBarItem.tooltip = vscode.l10n.t('Failed to fetch balance after {0} attempts. Click to retry.\nError: {1}', MAX_RETRIES, errorMsg);
     statusBarItem.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
 }
 
