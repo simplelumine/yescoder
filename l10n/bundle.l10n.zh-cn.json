@@ -2,7 +2,6 @@
   "YesCode: Loading...": "YesCode: 加载中...",
   "YesCode: Error": "YesCode: 错误",
   "YesCode: Fetch Error": "YesCode: 获取失败",
-  "YesCode: Fetch Error ({0})": "YesCode: 获取失败 ({0})",
   "YesCode Menu": "YesCode 菜单",
   "Refresh Balance": "刷新余额",
   "Manually refresh balance data": "手动刷新余额数据",
