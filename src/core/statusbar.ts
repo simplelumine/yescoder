@@ -15,9 +15,11 @@ export function createStatusBar(context: vscode.ExtensionContext): vscode.Status
     currentDisplayMode = context.globalState.get<DisplayMode>('displayMode', 'auto');
 
     statusBarItem = vscode.window.createStatusBarItem(
+        'yescode.balanceStatus',
         vscode.StatusBarAlignment.Right,
         100
     );
+    statusBarItem.name = 'YesCoder';
     statusBarItem.command = 'yescode.showMenu';
     statusBarItem.text = vscode.l10n.t('YesCode: Loading...');
     statusBarItem.show();

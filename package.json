@@ -3,7 +3,7 @@
   "displayName": "%displayName%",
   "publisher": "simplelumine",
   "description": "%description%",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "license": "MIT",
   "icon": "logo.png",
   "repository": {
@@ -47,7 +47,6 @@
         "command": "yescode.configureCliEnvironment",
         "title": "%command.configureCliEnvironment%"
       }
-
     ],
     "configuration": {
       "title": "YesCoder",
@@ -61,18 +60,20 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run package",
+    "package": "node esbuild.js --production",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.85.0",
     "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
+    "esbuild": "^0.28.0",
     "eslint": "^9.0.0",
     "typescript": "^5.7.0"
   }
